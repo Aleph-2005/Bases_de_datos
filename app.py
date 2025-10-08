@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 def get_connection():
-    db_url = os.environ.get("postgresql://postgres:[YOUR-PASSWORD]@db.hbvafgvsdudjgrmcjprm.supabase.co:5432/postgres")
+    db_url = os.environ.get("DB_url")
     return psycopg2.connect(db_url)
 
 @app.route("/")
