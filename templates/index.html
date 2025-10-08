@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Mi App en Render</title>
-</head>
+<head><title>Base de Datos</title></head>
 <body>
     <h1>Bienvenido a mi aplicación desplegada en Render</h1>
-    <p>Esta es una prueba funcional para la práctica de Bases de Datos.</p>
+    <p>Esta es una página funcional para la práctica de Base de Datos.</p>
+
+    <h2>Datos desde Supabase:</h2>
+    <ul>
+        {% for nombre, calificacion in datos %}
+            <li>{{ nombre }} — {{ calificacion }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
