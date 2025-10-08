@@ -1,6 +1,7 @@
 services:
   - type: web
-    name: mi-app-flask
+    name: base-de-datos-oly
     env: python
     buildCommand: ""
     startCommand: "python app.py"
+    pythonVersion: 3.11
