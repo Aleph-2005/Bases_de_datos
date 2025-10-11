@@ -1,15 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head><title>Base de Datos</title></head>
+<head>
+    <title>Base de Datos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
 <body>
     <h1>Bienvenido a mi aplicación desplegada en Render</h1>
     <p>Esta es una página funcional para la práctica de Base de Datos.</p>
 
-    <h2>Datos desde Supabase:</h2>
-    <ul>
-        {% for nombre, calificacion in datos %}
-            <li>{{ nombre }} — {{ calificacion }}</li>
-        {% endfor %}
-    </ul>
+    <h2>Datos desde Neon:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Entidad</th>
+                <th>Vivienda</th>
+                <th>Hogar</th>
+                <th>UPM</th>
+                <th>Renglón</th>
+                <th>Tipo de Delito</th>
+                <th>Número de Delito</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Pérdida</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in datos %}
+            <tr>
+                <td>{{ fila.entidad }}</td>
+                <td>{{ fila.viv }}</td>
+                <td>{{ fila.hogar }}</td>
+                <td>{{ fila.upm }}</td>
+                <td>{{ fila.renglon }}</td>
+                <td>{{ fila.tipo_delito }}</td>
+                <td>{{ fila.num_delito }}</td>
+                <td>{{ fila.nombre }}</td>
+                <td>{{ fila.apellido }}</td>
+                <td>{{ fila.perdida }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
