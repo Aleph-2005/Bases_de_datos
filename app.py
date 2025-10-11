@@ -9,28 +9,23 @@ def get_connection():
     return psycopg2.connect(db_url)
 
 @app.route("/")
-
 def home():
     conn = get_connection()
     cur = conn.cursor()
     
-    # Ejecutar consulta completa
     cur.execute("""
         SELECT entidad, viv, hogar, upm, renglon,
                tipo_delito, num_delito, nombre, apellido, perdida
         FROM modulo_victimizacion
     """)
     
-    # Obtener nombres de columnas
     columnas = [desc[0] for desc in cur.description]
-    
-    # Convertir a lista de diccionarios
     datos = [dict(zip(columnas, fila)) for fila in cur.fetchall()]
     
     cur.close()
     conn.close()
     
-
+    return render_template("index.html", datos=datos)
 
 @app.route("/saludo")
 def saludo():
@@ -38,7 +33,4 @@ def saludo():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)
