@@ -9,14 +9,28 @@ def get_connection():
     return psycopg2.connect(db_url)
 
 @app.route("/")
+
 def home():
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT nombre, calificacion FROM sda_tabla")
-    datos = cur.fetchall()
+    
+    # Ejecutar consulta completa
+    cur.execute("""
+        SELECT entidad, viv, hogar, upm, renglon,
+               tipo_delito, num_delito, nombre, apellido, perdida
+        FROM modulo_victimizacion
+    """)
+    
+    # Obtener nombres de columnas
+    columnas = [desc[0] for desc in cur.description]
+    
+    # Convertir a lista de diccionarios
+    datos = [dict(zip(columnas, fila)) for fila in cur.fetchall()]
+    
     cur.close()
     conn.close()
-    return render_template("index.html", datos=datos)
+    
+
 
 @app.route("/saludo")
 def saludo():
