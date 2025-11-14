@@ -10,16 +10,21 @@
 
 <div id="mensaje"></div>
 
-<h2>Clientes registrados</h2>
-<table id="tabla-clientes">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Fecha de nacimiento</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Aquí se insertarán los datos dinámicamente -->
-  </tbody>
-</table>
+ <h2>Clientes registrados</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha de nacimiento</th>
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.idCliente }}</td>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.fechaNacimiento }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
