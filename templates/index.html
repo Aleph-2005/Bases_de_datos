@@ -27,8 +27,8 @@
   </style>
 </head>
 <body>
-  <h1>Clientes registrados en Supabase</h1>
-  <table id="tabla-clientes">
+  <h1>Clientes registrados</h1>
+  <table>
     <thead>
       <tr>
         <th>ID</th>
@@ -37,43 +37,14 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Aquí se insertarán los datos dinámicamente -->
+      {% for cliente in clientes %}
+      <tr>
+        <td>{{ cliente.idCliente }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.fechaNacimiento }}</td>
+      </tr>
+      {% endfor %}
     </tbody>
   </table>
-
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    const supabaseUrl = 'https://supabase.com/dashboard/project/hbvafgvsdudjgrmcjprm/editor/30776?schema=public&sort=idcliente:asc';
-    const supabaseKey = 'TU-CLAVE-API';
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    const tablaBody = document.querySelector('#tabla-clientes tbody');
-
-    async function cargarClientes() {
-      const { data, error } = await supabase
-        .from('cliente')
-        .select('*')
-        .order('idCliente', { ascending: true });
-
-      if (error) {
-        console.error('Error al cargar clientes:', error.message);
-        return;
-      }
-
-      tablaBody.innerHTML = '';
-      data.forEach(cliente => {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `
-          <td>${cliente.idCliente}</td>
-          <td>${cliente.nombre}</td>
-          <td>${cliente.fechaNacimiento}</td>
-        `;
-        tablaBody.appendChild(fila);
-      });
-    }
-
-    cargarClientes();
-  </script>
 </body>
 </html>
